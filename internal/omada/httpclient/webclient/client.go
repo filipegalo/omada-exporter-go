@@ -55,7 +55,7 @@ var (
 func newClient(baseURL string, username string, password string, siteName string) *WebClient {
 	jar, _ := cookiejar.New(nil)
 	customTransport := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: internal.GetConfig().Omada.SkipTLSVerify},
 	}
 
 	instrumentedTransport := &ClientInstrumentation.InstrumentedRoundTripper{

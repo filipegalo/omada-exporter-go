@@ -80,7 +80,7 @@ var (
 
 func newClient(BaseURL string, ClientID string, ClientSecret string, SiteName string) *ApiClient {
 	customTransport := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: internal.GetConfig().Omada.SkipTLSVerify},
 	}
 
 	instrumentedTransport := &ClientInstrumentation.InstrumentedRoundTripper{

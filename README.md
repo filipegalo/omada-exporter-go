@@ -146,6 +146,7 @@ All configuration values are read from environment variables. These can be provi
 | `OMADA_CLIENT_SECRET` | OpenAPI Client Secret                                                  | -       |
 | `OMADA_USERNAME`      | Username for Web API access                                            | -          |
 | `OMADA_PASSWORD`      | Password for Web API access                                            | -          |
+| `OMADA_SKIP_TLS_VERIFY` | Skip TLS certificate verification (set to `false` for prod)         | `true`     |
 | `METRICS_PATH`        | HTTP path the metrics are served on                                    | `/metrics` |
 | `METRICS_PORT`        | Port the exporter listens on                                           | `8080`     |
 

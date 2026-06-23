@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"omada_exporter_go/internal"
 	"omada_exporter_go/internal/log"
 	utils "omada_exporter_go/internal/omada/httpclient/utils"
 )
@@ -52,7 +53,7 @@ func NewAccessToken(baseURL string, payload OpenApiTokenPayload) (*AccessToken, 
 	}
 	var a AccessToken
 	customTransport := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: internal.GetConfig().Omada.SkipTLSVerify},
 	}
 	a.httpClient = &http.Client{Transport: customTransport}
 	a.clientID = payload.ClientID
