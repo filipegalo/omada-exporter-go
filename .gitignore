@@ -8,6 +8,10 @@
 *.so
 *.dylib
 
+# Compiled exporter binary
+/main
+/omada_exporter
+
 # Test binary, built with `go test -c`
 *.test
 
@@ -26,6 +30,9 @@ go.work.sum
 
 # env file
 .env
+
+# Node
+node_modules/
 
 # Editor/IDE
 # .idea/

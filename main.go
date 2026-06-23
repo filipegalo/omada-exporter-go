@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"omada_exporter_go/internal"
-	"omada_exporter_go/internal/Log"
-	"omada_exporter_go/internal/Prometheus"
+	"omada_exporter_go/internal/log"
+	"omada_exporter_go/internal/prometheus"
 )
 
 func main() {

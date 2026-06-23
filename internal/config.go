@@ -4,6 +4,7 @@ import (
 	"sync"
 
 	"github.com/caarlos0/env/v10"
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -19,13 +20,6 @@ type Config struct {
 	Prometheus struct {
 		MetricsPath string `env:"METRICS_PATH" envDefault:"/metrics"`
 		MetricsPort string `env:"METRICS_PORT" envDefault:"8080"`
-	}
-	Loki struct {
-		LokiURL     string `env:"LOKI_URL"`
-		Environment string `env:"LOKI_ENV" envDefault:"dev"`
-		GoVersion   string
-		AppName     string
-		AppVersion  string `env:"LOKI_APP_VERSION" envDefault:"0.0.0"`
 	}
 }
 
@@ -46,12 +40,13 @@ func GetConfig() *Config {
 }
 
 func loadConfig() (*Config, error) {
+	// Load .env if present; ignore error so real env vars (e.g. Docker) still work.
+	_ = godotenv.Load()
+
 	cfg := &Config{}
 	err := env.Parse(cfg)
 	if err != nil {
 		return nil, err
 	}
-	cfg.Loki.AppName = AppName
-	cfg.Loki.GoVersion = goVersion
 	return cfg, nil
 }

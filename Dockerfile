@@ -13,8 +13,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o main .
 FROM alpine:latest
 ARG APP_VERSION='0.0.0'
 
-ENV LOKI_APP_VERSION=${APP_VERSION}
-ENV LOKI_ENV=prod
+ENV APP_VERSION=${APP_VERSION}
 
 RUN apk --no-cache add ca-certificates
 

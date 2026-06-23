@@ -11,21 +11,21 @@ Supports both Omada OpenAPI and Web API to accommodate current platform limitati
 
 ## Grafana Dashboards
 
-### [Site Overview](/Dashboards/Site_Overview.json)
+### [Site Overview](/dashboards/site_overview.json)
 
-![image](/Pictures/Site_Overview.png)
+![image](/pictures/site_overview.png)
 
-### [Router](/Dashboards/Router.json)
+### [Router](/dashboards/router.json)
 
-![image](/Pictures/Router_1.png)
+![image](/pictures/router_1.png)
 
-### [Switch](/Dashboards/Switch.json)
+### [Switch](/dashboards/switch.json)
 
-![image](/Pictures/Switch_1.png)
+![image](/pictures/switch_1.png)
 
-### [Access Point](/Dashboards/AccessPoint.json)
+### [Access Point](/dashboards/access_point.json)
 
-![image](/Pictures/AccessPoint_1.png)
+![image](/pictures/access_point_1.png)
 
 ## 🚀 Getting Started
 
@@ -36,33 +36,23 @@ Supports both Omada OpenAPI and Web API to accommodate current platform limitati
   - [**Service user account**](#omada-authentication-setup)
 - **Prometheus** (or another metrics scraper) to collect and store the metrics
 - **Grafana** to visualize the data using built-in dashboards
-- (Optional) **Grafana Loki** if you want to collect and view logs from the exporter
 
 ### Setup
 
 1. Clone the Repository
 
 ```shell
-git clone https://github.com/StanislawHorna/Omada_Exporter_Go.git
-cd Omada_Exporter_Go
+git clone https://github.com/filipegalo/omada-exporter-go.git
+cd omada-exporter-go
 ```
 
-2. Create `.env` File with variables from [Configuration Parameters](#configuration-parameters)
+2. Create the `.env` file from the template and fill in your values
 
+```shell
+cp .env.example .env
 ```
-LOG_LEVEL=info
 
-OMADA_URL=https://<omada_ip_address>:<omada_port>
-OMADA_SITE_NAME=<your_omada_site_name>
-OMADA_CLIENT_ID=<open_api_client_id>
-OMADA_CLIENT_SECRET=<open_api_client_secret>
-OMADA_USERNAME=<web_ui_username>
-OMADA_PASSWORD=<web_ui_password>
-
-LOKI_URL=http://<loki_ip_address>:<loki_port>
-LOKI_ENV=prod
-LOKI_APP_VERSION=1.0.0
-```
+   Then edit `.env` — see [Configuration Parameters](#configuration-parameters) for each variable.
 
 3. Build the Docker image
 
@@ -80,6 +70,10 @@ docker run -d \
   omada_exporter
 ```
 
+> [!TIP]
+> A `Makefile` is included with shortcuts: `make docker-build`, `make docker-run`,
+> or `make run` to run locally (loads `.env` automatically). Run `make help` for all targets.
+
 5. Configure Prometheus to scrape the data:
 
 ```YAML
@@ -92,7 +86,7 @@ scrape_configs:
     metrics_path: /metrics
 ```
 
-6. Import dashboards from [`Dashboards`](/Dashboards/) directory to your Grafana instance.
+6. Import dashboards from [`dashboards`](/dashboards/) directory to your Grafana instance.
 
 > [!TIP]
 > After starting up the exporter navigate to `http://"<docker_host_ip>:8080/metrics`
